@@ -37,6 +37,7 @@ docdir = join_paths(get_option('datadir'), 'doc', cdata.get('PACKAGE_NAME'))
 examples_dir = join_paths(docdir, 'examples')
 
 
+# taken from the `OBJ` variable inside of the `Makefile.in` file
 SRC_FILES = [
     'alg.c',
     'conf.c',
@@ -49,6 +50,7 @@ SRC_FILES = [
     'motion.c',
     'netcam.c',
     'netcam_ftp.c',
+    'netcam_http.c',
     'netcam_jpeg.c',
     'netcam_rtsp.c',
     'netcam_wget.c',
