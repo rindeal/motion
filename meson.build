@@ -70,13 +70,44 @@ threads_dep = dependency('threads')
 libjpeg_dep = dependency('libjpeg')
 
 
-if cc.compiles('
+## BEGIN: Check for pthread_setname_np (nonstandard GNU extension)
+code = '
     #include <pthread.h>
-    int main(void){
-        pthread_setname_np(pthread_self(), "name")
-    }')
+    int main(void) {
+        pthread_setname_np(pthread_self(), "name");
+    }
+'
+if cc.compiles(code)
     cdata.set('HAVE_PTHREAD_SETNAME_NP', 1)
 endif
+## END: Check for pthread_setname_np (nonstandard GNU extension)
+
+## BEGIN: Check for pthread_getname_np (nonstandard GNU extension)
+code = '
+    #include <pthread.h>
+    int main(void) {
+        pthread_getname_np(pthread_self(), NULL, 0);
+    }
+'
+if cc.compiles(code)
+    cdata.set('HAVE_PTHREAD_GETNAME_NP', 1)
+endif
+## END: Check for pthread_getname_np (nonstandard GNU extension)
+
+## BEGIN: Check for XSI strerror_r
+code = '
+    #include <string.h>
+    #include <errno.h>
+    int main(void) {
+        char buf[1024];
+        int ret = strerror_r(ENOMEM, buf, sizeof(buf));
+        return ret;
+    }
+'
+if cc.compiles(code)
+    cdata.set('XSI_STRERROR_R', 1)
+endif
+## END: Check for XSI strerror_r
 
 
 if get_option('WITH_V4L2')
