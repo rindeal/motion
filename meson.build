@@ -246,16 +246,6 @@ foreach e : examples_array
     examples += configure_file( input: e.get(0), output: e.get(1), configuration: cdata, install_dir: examples_dir )
 endforeach
 
-examples_bin = []
-examples_bin_array = [
-    [ 'motion.init-Debian.in',     'motion.init-Debian' ],
-    [ 'motion.init-FreeBSD.sh.in', 'motion.init-FreeBSD.sh' ],
-]
-foreach e : examples_bin_array
-    examples_bin += configure_file( input: e.get(0),  output: e.get(1),  configuration: cdata )
-endforeach
-install_data( examples_bin, install_dir: examples_dir, install_mode: 'r-xr-xr-x' )
-
 
 install_data(
     [
