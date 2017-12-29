@@ -13,7 +13,7 @@ option (
     'WITH_FFMPEG', type : 'boolean', value : true,
     description : 'enable FFmpeg support for encoding/decoding video' )
 option (
-    'WITH_WEBP', type : 'boolean', value : false,
+    'WITH_WEBP', type : 'boolean', value : true,
     description : 'Compile with Webp image support' )
 
 
